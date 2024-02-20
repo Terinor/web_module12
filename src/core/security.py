@@ -3,12 +3,10 @@ from datetime import datetime, timedelta
 from jose import jwt
 
 
-# Конфігурація для хешування паролів
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
-# Секретний ключ (зберігайте у безпечному місці та не викладайте в код)
-SECRET_KEY = "YOUR_SECRET_KEY"
+SECRET_KEY = "MY_SECRET_KEY"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
