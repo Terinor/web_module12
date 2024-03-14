@@ -6,7 +6,7 @@ from ..core.security import create_refresh_token, REFRESH_TOKEN_EXPIRE_MINUTES
 from datetime import datetime, timedelta, timezone
 from fastapi_mail import FastMail, MessageSchema
 from ..mail.mail_conf import conf
-from ..core import security  # Припустимо, що тут у вас функції для роботи з JWT
+from ..core import security
 from fastapi import BackgroundTasks
 
 
