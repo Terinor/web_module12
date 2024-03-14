@@ -2,13 +2,15 @@ from passlib.context import CryptContext
 from datetime import datetime, timedelta, timezone
 from jose import jwt
 from dotenv import load_dotenv
+import os
+
 
 load_dotenv()
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-SECRET_KEY = 'token_secret_key'
-ALGORITHM = 'token_algorithm'
+SECRET_KEY = os.getenv('token_secret_key')
+ALGORITHM = os.getenv('token_algorithm')
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 
