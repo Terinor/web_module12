@@ -13,7 +13,9 @@ DATABASE_URL = f"postgresql://{os.getenv('postgresql_user')}:" \
                f"{os.getenv('postgresql_host')}:" \
                f"{os.getenv('postgresql_port')}/" \
                f"{os.getenv('postgresql_database')}"
-
+"""
+Глобальна змінна для зберігання URL підключення до бази даних, формується з змінних середовища.
+"""
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

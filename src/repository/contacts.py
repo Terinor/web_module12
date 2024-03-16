@@ -6,6 +6,13 @@ from ..schemas import ContactCreate, ContactUpdate
 
 
 def create_contact(db: Session, contact: ContactCreate):
+    """
+    Створює новий контакт в базі даних за допомогою наданих даних.
+
+    :param db: Сесія бази даних.
+    :param contact: Дані контакту для створення.
+    :return: Інстанс створеного контакту.
+    """
     new_contact = Contact(**contact.dict())
     db.add(new_contact)
     db.commit()
@@ -14,6 +21,14 @@ def create_contact(db: Session, contact: ContactCreate):
 
 
 def get_contacts(db: Session, skip: int = 0, limit: int = 100):
+    """
+    Повертає список контактів з бази даних, з можливістю пагінації.
+
+    :param db: Сесія бази даних.
+    :param skip: Кількість контактів, які потрібно пропустити для пагінації.
+    :param limit: Максимальна кількість контактів, яка повертається.
+    :return: Список контактів.
+    """
     return db.query(Contact).offset(skip).limit(limit).all()
 
 

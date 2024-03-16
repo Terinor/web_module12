@@ -3,6 +3,9 @@ import os
 
 
 class Environ:
+    """
+    Клас для зберігання конфігурації електронної пошти, завантаженої з змінних середовища.
+    """
     MAIL_USERNAME = os.getenv("MAIL_USERNAME")
     MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
     MAIL_FROM = os.getenv("MAIL_FROM")
@@ -14,6 +17,7 @@ class Environ:
 
 
 conf = ConnectionConfig(
+
     MAIL_USERNAME = Environ.MAIL_USERNAME,
     MAIL_PASSWORD = Environ.MAIL_PASSWORD,
     MAIL_FROM = Environ.MAIL_FROM,

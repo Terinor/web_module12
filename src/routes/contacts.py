@@ -1,3 +1,4 @@
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
 from sqlalchemy.orm import Session
@@ -17,6 +18,11 @@ router = APIRouter()
 
 
 def get_db():
+    """
+    Генератор залежності, який створює та закриває сесію бази даних.
+
+    :yield: Інстанс сесії бази даних.
+    """
     db = SessionLocal()
     try:
         yield db
@@ -26,6 +32,13 @@ def get_db():
 
 @router.post("/", response_model=Contact)
 def create_contact_route(contact: ContactCreate, db: Session = Depends(get_db)):
+    """
+    Створює новий контакт в базі даних.
+
+    :param contact: Дані контакту для створення.
+    :param db: Сесія бази даних.
+    :return: Інстанс створеного контакту.
+    """
     return create_contact(db=db, contact=contact)
 
 

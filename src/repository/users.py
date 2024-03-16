@@ -11,6 +11,14 @@ from fastapi import BackgroundTasks
 
 
 def create_user(db: Session, user: UserCreate, background_tasks: BackgroundTasks):
+    """
+    Створює нового користувача в базі даних і відправляє лист з підтвердженням електронної адреси.
+
+    :param db: Сесія бази даних для виконання операції.
+    :param user: Модель UserCreate з даними для створення нового користувача.
+    :param background_tasks: Фонові завдання FastAPI для асинхронної відправки електронної пошти.
+    :return: Інстанс створеного користувача.
+    """
     db_user = User(email=user.email, hashed_password=get_password_hash(user.password))
     db.add(db_user)
     db.commit()
@@ -20,6 +28,14 @@ def create_user(db: Session, user: UserCreate, background_tasks: BackgroundTasks
 
 
 def authenticate_user(db: Session, email: str, password: str):
+    """
+    Аутентифікує користувача за електронною поштою та паролем.
+
+    :param db: Сесія бази даних для пошуку користувача.
+    :param email: Електронна пошта користувача.
+    :param password: Пароль користувача.
+    :return: Користувача, якщо аутентифікація успішна; інакше - False.
+    """
     user = db.query(User).filter(User.email == email).first()
     if not user or not verify_password(password, user.hashed_password):
         return False
@@ -34,6 +50,12 @@ def authenticate_user(db: Session, email: str, password: str):
 
 
 async def send_verification_email(email: str, db: Session):
+    """
+    Відправляє асинхронно лист для верифікації електронної пошти користувача.
+
+    :param email: Електронна адреса для відправки листа верифікації.
+    :param db: Сесія бази даних, використовується для додаткових операцій з базою даних, якщо потрібно.
+    """
     token_data = {"sub": email}
     token = security.create_access_token(data=token_data, expires_delta=timedelta(hours=24))
     verification_url = f"http://yourfrontend.com/verify?token={token}"

@@ -23,6 +23,9 @@ def get_password_hash(password):
 
 
 def create_access_token(data: dict, expires_delta: timedelta = None):
+    """
+    Створення access токену
+    """
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.now(timezone.utc) + expires_delta
@@ -37,6 +40,9 @@ REFRESH_TOKEN_EXPIRE_MINUTES = 1440  # 24 години сподіваюсь
 
 
 def create_refresh_token(data: dict, expires_delta: timedelta = None):
+    """
+    Створення refresh токену
+    """
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.now(timezone.utc) + expires_delta

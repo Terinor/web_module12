@@ -7,9 +7,14 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
+"""
+Головний об'єкт додатку FastAPI, який використовується для додавання маршрутів і конфігурації середовища.
+"""
 
 app.include_router(contacts_routes.router, prefix="/api")
-
+"""
+Включення маршрутизатора контактів до основного додатку з префіксом '/api'.
+"""
 
 # Ініціалізація лімітера з використанням IP адреси клієнта як ключа
 limiter = Limiter(key_func=get_remote_address)
@@ -31,4 +36,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+"""
+Додає проміжне програмне забезпечення для управління CORS, дозволяючи запити з певних джерел.
+"""
